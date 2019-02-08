@@ -1,6 +1,6 @@
 package com.okta.springbootvue.controller;
 
-import com.okta.springbootvue.Note;
+import com.okta.springbootvue.model.Note;
 import com.okta.springbootvue.exception.ResourceNotFoundException;
 import com.okta.springbootvue.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

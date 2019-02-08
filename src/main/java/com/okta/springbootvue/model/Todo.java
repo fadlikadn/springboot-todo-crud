@@ -1,4 +1,4 @@
-package com.okta.springbootvue;
+package com.okta.springbootvue.model;
 
 import lombok.*;
 

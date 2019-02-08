@@ -1,5 +1,7 @@
 package com.okta.springbootvue;
 
+import com.okta.springbootvue.model.Todo;
+import com.okta.springbootvue.repository.TodoRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +13,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import javax.servlet.FilterRegistration;
 import java.util.Collections;
 import java.util.stream.Stream;
 
@@ -23,18 +24,18 @@ public class SpringBootVueApplication {
 		SpringApplication.run(SpringBootVueApplication.class, args);
 	}
 
-	// Bootstrap some test data into in-memory database
-	@Bean
-	ApplicationRunner init(TodoRepository repository) {
-		return args -> {
-			Stream.of("Buy milk", "Eat pizza", "Write tutorial", "Study Vue.js", "GO kayaking").forEach(name -> {
-				Todo todo = new Todo();
-				todo.setTitle(name);
-				repository.save(todo);
-			});
-			repository.findAll().forEach(System.out::println);
-		};
-	}
+	// Bootstrap some test data into in-memory database, just enable it on first starting of the app
+//	@Bean
+//	ApplicationRunner init(TodoRepository repository) {
+//		return args -> {
+//			Stream.of("Buy milk", "Eat pizza", "Write tutorial", "Study Vue.js", "GO kayaking").forEach(name -> {
+//				Todo todo = new Todo();
+//				todo.setTitle(name);
+//				repository.save(todo);
+//			});
+//			repository.findAll().forEach(System.out::println);
+//		};
+//	}
 
 	// Fix the CORS errors
 	@Bean
