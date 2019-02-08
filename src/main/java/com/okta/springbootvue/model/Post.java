@@ -3,6 +3,8 @@ package com.okta.springbootvue.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
@@ -23,6 +25,12 @@ public class Post extends AuditModel {
     @NotNull
     @Lob
     private String content;
+
+    // Bidirectional one-to-maby mapping
+    @OneToMany(cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        mappedBy = "post")
+    private Set<Comment> comments = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -54,5 +62,13 @@ public class Post extends AuditModel {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
