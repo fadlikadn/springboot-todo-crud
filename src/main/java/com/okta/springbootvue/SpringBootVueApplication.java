@@ -5,20 +5,33 @@ import com.okta.springbootvue.repository.TodoRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.TimeZone;
 import java.util.stream.Stream;
 
 @SpringBootApplication
 @EnableJpaAuditing
+@EntityScan(basePackageClasses = {
+		SpringBootVueApplication.class,
+		Jsr310Converters.class
+})
 public class SpringBootVueApplication {
+
+	@PostConstruct
+	void init() {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootVueApplication.class, args);

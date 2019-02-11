@@ -26,7 +26,7 @@ public class Post extends AuditModel {
     @Lob
     private String content;
 
-    // Bidirectional one-to-maby mapping
+    // Bidirectional one-to-many mapping
     @OneToMany(cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         mappedBy = "post")
